@@ -41,14 +41,14 @@ router.post('/login', async (req, res) => {
 
     const accessToken = jwt.sign(
       {
-        id: user._id,
-        isAdmin: user.isAdmin
+        id: user._id, // Using id user to check if the user belong to this account and can make CRUD operations
+        isAdmin: user.isAdmin // if user is admin, he can make CRUD operations for any collection
       },
       process.env.JWT_KEY,
       { expiresIn: '3d' }
     )
 
-    const { password, ...others } = user._doc // Destructure user info and send all infos exept password
+    const { password, ...others } = user._doc // Destructure user info and send all infos except password
 
     res.status(200).json({ ...others, accessToken })
   } catch (error) {
