@@ -5,6 +5,7 @@ const app = express()
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const authRoute = require('./routes/auth')
+const passwordResetRoute = require('./routes/passwordReset')
 const userRoute = require('./routes/user')
 const productRoute = require('./routes/product')
 const cartRoute = require('./routes/cart')
@@ -29,6 +30,10 @@ app.use('/api/products', productRoute)
 app.use('/api/carts', cartRoute)
 app.use('/api/orders', orderRoute)
 app.use('/api/checkout', stripeRoute)
+app.use('/api/password', passwordResetRoute)
+
+app.set('view engine', 'ejs')
+app.use(express.urlencoded({ extended: false }))
 
 app.listen(process.env.PORT || 5000, () => {
   console.log('Backend server is running')
