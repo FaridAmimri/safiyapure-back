@@ -22,8 +22,8 @@ mongoose
     log.error(err)
   })
 
-app.use(cors())
-app.use(express.json())
+app.use(cors()) // Give access to AJAX requests from navigator to server
+app.use(express.json()) // Give access to request body
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
 app.use('/api/products', productRoute)
